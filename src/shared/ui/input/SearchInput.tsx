@@ -6,7 +6,7 @@ interface PropsType extends DefaultProps {
   placeholder?: string
   initialValue?: string
   onChange: (v: string) => void
-  onEnter?: () => Promise<void>
+  onEnter?: () => void
 }
 
 export const SearchInput: React.FC<PropsType> = ({

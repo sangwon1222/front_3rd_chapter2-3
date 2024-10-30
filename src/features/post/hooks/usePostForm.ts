@@ -1,4 +1,4 @@
-import { Post, PostForm } from "@shared/types/posts"
+import { Post, PostForm } from "@entities/post/types"
 import { useEffect, useMemo, useState } from "react"
 
 export const usePostForm = (isOpen: boolean, initialValue: Partial<Post>) => {

@@ -1,93 +1,22 @@
-import { useState } from "react"
+import { PostsGridWrap } from "@entities/post/ui/PostsGridWrap"
+import { useUserCache } from "@entities/user/hooks/useUserCache"
+import { DialogWrap } from "@features/dialog/ui/DialogWrap"
+import { PostsHeader } from "@entities/post/ui/PostsHeader"
 import { PostsWrap } from "@shared/ui"
-import { PostsHeader } from "@entity/post/ui/PostsHeader"
-// import { useComments } from "@entity/post/hooks/useComments"
-import { usePosts } from "@entity/post/hooks/usePosts"
-// import { useCommentForm } from "@features/post/hooks/useCommentForm"
-import { PostsGridController } from "@entity/post/ui/grid/PostsGridController"
-import { useSearchParams } from "@entity/post/hooks/useSearchParams"
-import { useUserCache } from "@entity/user/hooks/useUserCache"
-import { NewPostForm } from "@features/post/ui/form/NewPostForm"
-import { PostEditForm } from "@features/post/ui/form/PostEditForm"
-import { PostDetail } from "@features/post/ui/form/PostDetail"
 
 const PostsManager = () => {
-  // const { comments, fetchComments, deleteComment, increaseLikeComment } =
-  //   useComments()
-
-  // const { updateCommentForm } = useCommentForm({
-  //   userId: -1,
-  //   postId: -1,
-  //   body: "",
-  // })
   useUserCache()
-
-  const { searchParams, updateSearchParams, goNextPage, goPrevPage } =
-    useSearchParams({
-      skip: 0,
-      limit: 10,
-      q: "",
-      sortBy: "",
-      sortOrder: "asc",
-      selectedTag: "",
-    })
-
-  const {
-    posts,
-    total,
-    selectedPost,
-    postsLoading,
-    addPost,
-    updatePost,
-    deletePost,
-    // fetchPosts,
-    searchPosts,
-    updateSelectedPost,
-  } = usePosts(searchParams)
-
-  const [showAddDialog, setShowAddDialog] = useState(false)
-  const [showEditDialog, setShowEditDialog] = useState(false)
-  const [showPostDetailDialog, setShowPostDetailDialog] = useState(false)
 
   return (
     <PostsWrap className="w-full max-w-6xl mx-auto">
-      <PostsHeader setShowAddDialog={setShowAddDialog} />
+      {/* 게시판 헤더 */}
+      <PostsHeader />
 
-      <PostsGridController
-        posts={posts}
-        searchParams={searchParams}
-        loading={postsLoading}
-        total={total}
-        updateSearchParams={updateSearchParams}
-        deletePost={deletePost}
-        searchPosts={searchPosts}
-        goNextPage={goNextPage}
-        goPrevPage={goPrevPage}
-        updateSelectedPost={updateSelectedPost}
-        setShowEditDialog={setShowEditDialog}
-        setShowPostDetailDialog={setShowPostDetailDialog}
-      />
+      {/* 게시판 GRID 보드 */}
+      <PostsGridWrap />
 
-      <NewPostForm
-        userId={1}
-        showAddDialog={showAddDialog}
-        setShowAddDialog={setShowAddDialog}
-        addPost={addPost}
-      />
-
-      <PostEditForm
-        selectedPost={selectedPost}
-        showEditDialog={showEditDialog}
-        setShowEditDialog={setShowEditDialog}
-        updatePost={updatePost}
-      />
-
-      <PostDetail
-        selectedPost={selectedPost}
-        showPostDetailDialog={showPostDetailDialog}
-        setShowPostDetailDialog={setShowPostDetailDialog}
-        searchQuery={searchParams.q}
-      />
+      {/* 팝업 리스트 */}
+      <DialogWrap />
     </PostsWrap>
   )
 }
