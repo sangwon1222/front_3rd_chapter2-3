@@ -16,6 +16,7 @@ export const PostActionCell: React.FC<PropsType> = ({
   openPostDetail,
 }) => {
   const { deletePost } = usePostDelete()
+
   return (
     <TableCell>
       <div className="flex items-center gap-2">

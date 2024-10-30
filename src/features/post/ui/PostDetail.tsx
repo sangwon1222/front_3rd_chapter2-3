@@ -3,7 +3,7 @@ import { searchParamsAtom } from "@features/searchParams/model/atom"
 import { selectedPostsAtom } from "@features/post/model/atom"
 import { useDialog } from "@features/dialog/hooks/useDialog"
 import { highlightText } from "@shared/utils/highlightText"
-import { CommentBox } from "@features/comment/ui/Comment"
+import { CommentBox } from "@features/comment/ui/CommentBox"
 import { useAtomValue } from "jotai"
 
 export const PostDetail: React.FC = () => {

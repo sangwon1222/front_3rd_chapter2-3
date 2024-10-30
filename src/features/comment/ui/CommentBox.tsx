@@ -41,7 +41,7 @@ export const CommentBox: React.FC<PropsType> = ({ postId, searchQuery }) => {
             </div>
             <div className="flex items-center space-x-1">
               <LikeCommentBtn comment={comment} />
-              <EditCommentBtn />
+              <EditCommentBtn comment={comment} />
               <DeleteCommentBtn commentId={comment.id} />
             </div>
           </div>

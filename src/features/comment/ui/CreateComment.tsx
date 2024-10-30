@@ -1,6 +1,6 @@
 import { useCommentCreate } from "@features/comment/hooks/useCommentCreate"
 import { useSelectedPost } from "@features/post/hooks/useSelectedPost"
-import { DEFAULT_COMMENT_DATA } from "@shared/constants/comment"
+import { DEFAULT_COMMENT_FORM } from "@shared/constants/comment"
 import { useDialog } from "@features/dialog/hooks/useDialog"
 import { useCommentForm } from "./useCommentForm"
 import { useCallback, useEffect } from "react"
@@ -18,7 +18,7 @@ export const CreateComment: React.FC = () => {
   const { selectedPost } = useSelectedPost()
   const { openCreateComment, closeDialog } = useDialog()
   const { commentForm, updateCommentForm, resetCommentForm } = useCommentForm({
-    ...DEFAULT_COMMENT_DATA,
+    ...DEFAULT_COMMENT_FORM,
   })
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import { updateCommentApi } from "@features/comment/api/updateComment"
 import { Comment, CommentsFetchResult } from "@features/comment/types"
+import { updateCommentApi } from "@features/comment/api/updateComment"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const useCommentUpdate = () => {

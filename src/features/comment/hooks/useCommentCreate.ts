@@ -1,10 +1,10 @@
-import {
-  Comment,
-  CommentForm,
-  CommentsFetchResult,
-} from "@features/comment/types"
+import { createCommentApi } from "@features/comment/api/createComment"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createCommentApi } from "../api/createComment"
+import {
+  CommentsFetchResult,
+  CommentForm,
+  Comment,
+} from "@features/comment/types"
 
 export const useCommentCreate = () => {
   const queryClient = useQueryClient()
