@@ -16,6 +16,7 @@ export const usePostRead = () => {
   } = useQuery<{ total: number; posts: Post[] }>({
     queryKey: ["posts", searchParams],
     queryFn: () => readPostApi(searchParams),
+    refetchInterval: 1000 * 60,
   })
 
   // posts 로딩 중이면 중지

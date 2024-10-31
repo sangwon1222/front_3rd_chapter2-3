@@ -9,6 +9,7 @@ export const useCommentRead = (postId: number) => {
   } = useQuery({
     queryKey: ["comment"],
     queryFn: () => readCommentApi(postId),
+    staleTime: Infinity,
   })
 
   if (isCommentLoading)
