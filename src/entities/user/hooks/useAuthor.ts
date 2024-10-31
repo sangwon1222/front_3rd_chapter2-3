@@ -1,5 +1,5 @@
 import { fetchUserApi } from "@entities/user/api/fetchUserApi"
-import { DEFAULT_USER_DATA } from "@shared/constants/user"
+import { DEFAULT_USER_DATA } from "@entities/user/constants"
 import { userCache } from "@entities/user/services"
 import { useQuery } from "@tanstack/react-query"
 import { User } from "@entities/user/types"

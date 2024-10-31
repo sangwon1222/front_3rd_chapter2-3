@@ -1,9 +1,9 @@
-import { CreatePostDialog } from "@features/post/ui/CreatePostDialog"
-import { CreateComment } from "@features/comment/ui/CreateComment"
-import { EditComment } from "@features/comment/ui/EditComment"
-import { PostEditForm } from "@features/post/ui/PostEditForm"
-import { PostDetail } from "@features/post/ui/PostDetail"
-import { UserDetail } from "@features/user/ui/UserDetail"
+import { CreatePostDialog } from "@entities/post/ui/CreatePostDialog"
+import { PostEditForm } from "@entities/post/ui/PostEditForm"
+import { PostDetail } from "@entities/post/ui/PostDetail"
+import { UserDetail } from "@entities/user/ui/UserDetail"
+import { CreateComment } from "@entities/comment/ui/CreateComment"
+import { EditComment } from "@entities/comment/ui/EditComment"
 
 export const DialogWrap = () => {
   return (

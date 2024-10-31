@@ -1,36 +1,43 @@
-import { useSelectedPost } from "@features/post/hooks/useSelectedPost"
-import { PostActionCell } from "@features/post/ui/PostActionCell"
-import { PostTitleCell } from "@features/post/ui/PostTitleCell"
-import { PostUserCell } from "@features/post/ui/PostUserCell"
-import { useSelectUser } from "@entities/user/hooks/useSelectUser"
-import { PostLikeCell } from "@features/post/ui/PostLikeCell"
-import { useDialog } from "@features/dialog/hooks/useDialog"
+import { useUserDetailDialog } from "@features/dialog/hooks/useUserDetailDialog"
+import { usePostDetailDialog } from "@features/dialog/hooks/usePostDetailDialog"
+import { useEditPostDialog } from "@features/dialog/hooks/useEditPostDialog"
+import { useSelectedPost } from "@entities/post/hooks/useSelectedPost"
+import { PostActionCell } from "@entities/post/ui/PostActionCell"
+import { PostTitleCell } from "@entities/post/ui/PostTitleCell"
+import { PostUserCell } from "@entities/post/ui/PostUserCell"
+import { PostLikeCell } from "@entities/post/ui/PostLikeCell"
 import { usePostRead } from "../hooks/usePostRead"
 import { User } from "@entities/user/types"
 import React, { useCallback } from "react"
 import { TableCell } from "@shared/ui"
 import { Post } from "../types"
+import { useAtom } from "jotai"
+import { selectedUserAtom } from "@entities/user/model/atom"
 
 export const PostsGridBody: React.FC = () => {
   const { updateSelectedPost } = useSelectedPost()
-  const { updateSelectedUser } = useSelectUser()
-  const { openDialog } = useDialog()
+  const [selectedUser, setSelectedUser] = useAtom(selectedUserAtom)
+
+  const { openDialog: openUserDetail } = useUserDetailDialog()
+  const { openDialog: openEditPost } = useEditPostDialog()
+  const { openDialog: openPostDetail } = usePostDetailDialog()
+
   const { postData } = usePostRead()
 
   // 유저 모달 열기
   const openUserModal = useCallback(
     (user: User) => {
-      updateSelectedUser(user)
-      openDialog("detailUser")
+      setSelectedUser(user)
+      openUserDetail()
     },
-    [updateSelectedUser],
+    [selectedUser],
   )
 
   // 포스트 편집 모달 열기
   const openEditDialog = useCallback(
     (post: Post) => {
       updateSelectedPost(post)
-      openDialog("editPost")
+      openEditPost()
     },
     [updateSelectedPost],
   )
@@ -39,7 +46,7 @@ export const PostsGridBody: React.FC = () => {
   const openDetailDialog = useCallback(
     (post: Post) => {
       updateSelectedPost(post)
-      openDialog("detailPost")
+      openPostDetail()
     },
     [updateSelectedPost],
   )

@@ -1,6 +1,6 @@
-import { PostPagination } from "@features/post/ui/PostPagination"
+import { PostPagination } from "@entities/post/ui/PostPagination"
 import { usePostRead } from "@entities/post/hooks/usePostRead"
-import { PostSearch } from "@features/post/ui/PostSearch"
+import { PostSearch } from "@entities/post/ui/PostSearch"
 import { PostGrid } from "@entities/post/ui/PostGrid"
 import { Loading } from "@shared/ui/loading"
 import { TableWrap } from "@shared/ui"
