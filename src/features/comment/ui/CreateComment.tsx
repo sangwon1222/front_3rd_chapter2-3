@@ -1,8 +1,8 @@
 import { useCommentCreate } from "@features/comment/hooks/useCommentCreate"
+import { useCommentForm } from "@features/comment/hooks/useCommentForm"
 import { useSelectedPost } from "@features/post/hooks/useSelectedPost"
 import { DEFAULT_COMMENT_FORM } from "@shared/constants/comment"
 import { useDialog } from "@features/dialog/hooks/useDialog"
-import { useCommentForm } from "./useCommentForm"
 import { useCallback, useEffect } from "react"
 import { Button } from "@shared/ui/button"
 import {

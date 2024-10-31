@@ -1,21 +1,28 @@
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { CommentForm } from "@features/comment/types"
-import { useState } from "react"
 
-export const useCommentForm = (initialValue: CommentForm) => {
-  const [newCommentForm, setNewComment] = useState<CommentForm>(initialValue)
-  /**
-   * 새 댓글 Form
-   * @param key   body | postId | userId
-   * @param value string | number | number
-   */
-  const updateCommentForm = (update: Partial<CommentForm>) => {
-    setNewComment((prev) => ({ ...prev, update }))
+export const useCommentForm = (initialData: CommentForm) => {
+  const [commentForm, setCommentForm] = useState<CommentForm>({
+    ...initialData,
+  })
+
+  useEffect(() => {
+    setCommentForm({ ...initialData })
+  }, [])
+
+  const updateCommentForm = useCallback(
+    (update: Partial<CommentForm>) => {
+      setCommentForm((prev) => ({ ...prev, ...update }))
+    },
+    [commentForm],
+  )
+
+  const resetCommentForm = () => {
+    setCommentForm((prev) => ({ ...prev, title: "", body: "" }))
   }
 
-  const resetCommentForm = () => setNewComment(initialValue)
-
   return {
-    newCommentForm,
+    commentForm: useMemo(() => commentForm, [commentForm]),
     updateCommentForm,
     resetCommentForm,
   }
