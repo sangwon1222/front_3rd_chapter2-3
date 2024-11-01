@@ -1,55 +1,41 @@
+import { useSearchSortOrder } from "@features/searchParams/hooks/useSearchSortOrder"
 import { SORT_BY_LIST, SORT_ORDER_LIST } from "@features/searchParams/constants"
-import { searchParamsAtom } from "@features/searchParams/model/atom"
-import { useSearchPost } from "@entities/post/hooks/useSearchPost"
-import { SearchParams } from "@features/searchParams/types"
-import { SearchInput } from "@shared/ui/input/SearchInput"
+import { useSearchSortBy } from "@features/searchParams/hooks/useSearchSortBy"
+import { useSearchTag } from "@features/searchParams/hooks/useSearchTag"
 import { SelectRoot } from "@shared/ui/select/SelectRoot"
 import { useTags } from "@entities/tag/hooks/useTags"
-import { useAtom } from "jotai"
+import { SearchTextInput } from "./SearchTextInput"
 
 export const PostSearch: React.FC = () => {
-  const [searchParams, updateSearchParams] = useAtom(searchParamsAtom)
-  const { search, setSearch } = useSearchPost(searchParams.q)
-  const { tags } = useTags()
+  const { sortOrder, updateSearchSortOrder } = useSearchSortOrder()
+  const { sortBy, updateSearchSortBy } = useSearchSortBy()
+  const { searchTag, updateSearchTag } = useSearchTag()
 
-  const handleSearchPost = () => {
-    updateSearchParams((prev: SearchParams) => ({ ...prev, q: search }))
-  }
+  const { tags } = useTags()
 
   return (
     <div className="flex gap-4">
       <div className="flex-1">
-        <SearchInput
-          placeholder="게시물 검색..."
-          initialValue={search}
-          onChange={(v) => setSearch(v)}
-          onEnter={handleSearchPost}
-        />
+        <SearchTextInput />
       </div>
 
       <SelectRoot
         items={tags}
         placeholder="태그 선택"
-        value={searchParams.selectedTag}
-        onValueChange={(selectedTag) =>
-          updateSearchParams((prev: SearchParams) => ({ ...prev, selectedTag }))
-        }
+        value={searchTag}
+        onValueChange={updateSearchTag}
       />
       <SelectRoot
         items={SORT_BY_LIST}
         placeholder="정렬 기준"
-        value={searchParams.sortBy}
-        onValueChange={(sortBy) =>
-          updateSearchParams((prev: SearchParams) => ({ ...prev, sortBy }))
-        }
+        value={sortBy}
+        onValueChange={updateSearchSortBy}
       />
       <SelectRoot
         items={SORT_ORDER_LIST}
         placeholder="정렬 순서"
-        value={searchParams.sortOrder}
-        onValueChange={(sortOrder) =>
-          updateSearchParams((prev: SearchParams) => ({ ...prev, sortOrder }))
-        }
+        value={sortOrder}
+        onValueChange={updateSearchSortOrder}
       />
     </div>
   )

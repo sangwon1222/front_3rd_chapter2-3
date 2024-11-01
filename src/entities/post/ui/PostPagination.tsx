@@ -1,6 +1,6 @@
-import { useSearchParams } from "@features/searchParams/hooks/useSearchParams"
+import { useSearchScale } from "@features/searchParams/hooks/useSearchScale"
 import { LIMIT_DEFAULT, LIMIT_LIST } from "@features/searchParams/constants"
-import { searchParamsAtom } from "@features/searchParams/model/atom"
+import { searchScaleAtom } from "@features/searchParams/model/atom"
 import { SelectRoot } from "@shared/ui/select/SelectRoot"
 import { Button } from "@shared/ui/button"
 import { useAtomValue } from "jotai"
@@ -10,8 +10,8 @@ type PropsType = {
 }
 
 export const PostPagination: React.FC<PropsType> = ({ total }) => {
-  const { limit, skip } = useAtomValue(searchParamsAtom)
-  const { updateSearchParams, goNextPage, goPrevPage } = useSearchParams()
+  const { limit, skip } = useAtomValue(searchScaleAtom)
+  const { updateSearchScale, goNextPage, goPrevPage } = useSearchScale()
 
   const hasNotPrev = skip === 0
   const hasNotNext = skip + limit >= total
@@ -24,7 +24,7 @@ export const PostPagination: React.FC<PropsType> = ({ total }) => {
           <SelectRoot
             items={LIMIT_LIST}
             value={limit.toString()}
-            onValueChange={(v) => updateSearchParams({ limit: Number(v) })}
+            onValueChange={(v) => updateSearchScale({ limit: Number(v) })}
             placeholder={LIMIT_DEFAULT}
           />
 

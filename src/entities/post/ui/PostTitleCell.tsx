@@ -1,6 +1,6 @@
-import { useSearchParams } from "@features/searchParams/hooks/useSearchParams"
 import { NORMAL_TAG_STYLE, SELECTED_TAG_STYLE } from "@entities/tag/constants"
-import { searchParamsAtom } from "@features/searchParams/model/atom"
+import { useSearchTag } from "@features/searchParams/hooks/useSearchTag"
+import { searchTextAtom } from "@features/searchParams/model/atom"
 import { highlightText } from "@shared/utils/highlightText"
 import { shallowEqual } from "@shared/utils/shallowEqual"
 import { TableCell } from "@shared/ui"
@@ -12,13 +12,13 @@ type PropsType = {
 }
 
 export const PostTitleCell: React.FC<PropsType> = ({ title, tags }) => {
-  const { updateSearchParams } = useSearchParams()
-  const { q, selectedTag } = useAtomValue(searchParamsAtom)
+  const { searchTag: selectedTag, updateSearchTag } = useSearchTag()
+  const searchText = useAtomValue(searchTextAtom)
 
   return (
     <TableCell>
       <div className="space-y-1">
-        <div>{highlightText(title, q)}</div>
+        <div>{highlightText(title, searchText)}</div>
 
         <div className="flex flex-wrap gap-1">
           {tags.map((tag, index) => (
@@ -29,9 +29,7 @@ export const PostTitleCell: React.FC<PropsType> = ({ title, tags }) => {
                   ? SELECTED_TAG_STYLE
                   : NORMAL_TAG_STYLE
               }`}
-              onClick={() => {
-                updateSearchParams({ selectedTag: tag, skip: 0 })
-              }}
+              onClick={() => updateSearchTag(tag)}
             >
               {tag}
             </span>

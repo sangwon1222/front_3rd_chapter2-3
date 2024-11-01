@@ -6,3 +6,8 @@ export interface SearchParams {
   q: string
   selectedTag: string
 }
+
+export interface SearchParamScale {
+  skip: number
+  limit: number
+}

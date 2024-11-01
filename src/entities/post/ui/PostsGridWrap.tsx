@@ -2,7 +2,6 @@ import { PostPagination } from "@entities/post/ui/PostPagination"
 import { usePostRead } from "@entities/post/hooks/usePostRead"
 import { PostSearch } from "@entities/post/ui/PostSearch"
 import { PostGrid } from "@entities/post/ui/PostGrid"
-import { Loading } from "@shared/ui/loading"
 import { TableWrap } from "@shared/ui"
 
 export const PostsGridWrap: React.FC = () => {
@@ -15,7 +14,7 @@ export const PostsGridWrap: React.FC = () => {
         <PostSearch />
 
         {/* 게시물 테이블 */}
-        {isPostsLoading ? <Loading /> : <PostGrid />}
+        <PostGrid isLoading={isPostsLoading} posts={postData.posts} />
 
         {/* 페이지네이션 */}
         <PostPagination total={postData.total} />

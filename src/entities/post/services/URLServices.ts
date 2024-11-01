@@ -7,7 +7,7 @@ export const updateURL = (
 ) => {
   const { skip, limit, q, sortBy, sortOrder, selectedTag } = searchParams
 
-  const params = new URLSearchParams()
+  const params = new URLSearchParams(window.location.search)
   if (skip) params.set("skip", skip.toString())
   if (limit) params.set("limit", limit.toString())
   if (q) params.set("search", q)
@@ -18,6 +18,12 @@ export const updateURL = (
   navigate(`?${params.toString()}`)
 }
 
+/**
+ * search와 tag 검색을 한번에 못한다. https://dummyjson.com
+ * 검색 시에 search , tag 중 우선도 파악 필요
+ * ex: (search가 중요하면 tag초기화하고 검색) / tag가 중요하면 search 초기화하고 tag 검색
+ * TODO api를 만들거나 / 검색 구조 변경 필요
+ */
 export const convertSearchParamsToString = ({
   skip,
   limit,
@@ -37,19 +43,16 @@ export const convertSearchParamsToString = ({
   const hasTag = selectedTag && selectedTag !== "all"
   const hasSearch = q && q !== ""
 
-  if (hasTag) return `/tag/${selectedTag}?${params.toString()}`
   if (hasSearch) return `/search?q=${q}&${params.toString()}`
+  if (hasTag) return `/tag/${selectedTag}?${params.toString()}`
   return `?${params.toString()}`
 }
 
-export const getSearchParamsToURL = (locationSearch: string) => {
-  const params = new URLSearchParams(locationSearch)
-  const q = params.get("search") || ""
-  const skip = parseInt(params.get("skip") || "0")
-  const limit = parseInt(params.get("limit") || "10")
-  const sortBy = params.get("sortBy") || ""
-  const sortOrder = params.get("sortOrder") || "asc"
-  const selectedTag = params.get("tag") || ""
+export const getSearchParamsToURL = (key: string) => {
+  const params = new URLSearchParams(window.location.search)
 
-  return { skip, limit, q, sortBy, sortOrder, selectedTag }
+  if (key === "limit" || key === "skip") return params.get(key) || ""
+  if (key === "sortOrder") return params.get(key) || "asc"
+
+  return params.get(key) || ""
 }

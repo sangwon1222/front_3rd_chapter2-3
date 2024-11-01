@@ -10,9 +10,9 @@ import { Plus } from "lucide-react"
 
 type PropsType = {
   postId: number
-  searchQuery: string
+  searchText: string
 }
-export const CommentBox: React.FC<PropsType> = ({ postId, searchQuery }) => {
+export const CommentBox: React.FC<PropsType> = ({ postId, searchText }) => {
   const { openDialog } = useCreateCommentDialog()
   const { comments } = useCommentRead(postId)
 
@@ -36,7 +36,7 @@ export const CommentBox: React.FC<PropsType> = ({ postId, searchQuery }) => {
                 {comment.user.username}:
               </span>
               <span className="truncate">
-                {highlightText(comment.body, searchQuery)}
+                {highlightText(comment.body, searchText)}
               </span>
             </div>
             <div className="flex items-center space-x-1">
