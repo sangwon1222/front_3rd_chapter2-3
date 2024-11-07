@@ -1,5 +1,6 @@
 import { SearchParams } from "@features/searchParams/types"
 import { NavigateFunction } from "react-router-dom"
+import { SEARCH_PARAMS } from "../constants"
 
 export const updateURL = (
   navigate: NavigateFunction,
@@ -8,12 +9,12 @@ export const updateURL = (
   const { skip, limit, q, sortBy, sortOrder, selectedTag } = searchParams
 
   const params = new URLSearchParams(window.location.search)
-  if (skip) params.set("skip", skip.toString())
-  if (limit) params.set("limit", limit.toString())
-  if (q) params.set("search", q)
-  if (sortBy) params.set("sortBy", sortBy)
-  if (sortOrder) params.set("sortOrder", sortOrder)
-  if (selectedTag) params.set("tag", selectedTag)
+  if (skip) params.set(SEARCH_PARAMS.SKIP, skip.toString())
+  if (limit) params.set(SEARCH_PARAMS.LIMIT, limit.toString())
+  if (q) params.set(SEARCH_PARAMS.SEARCH, q)
+  if (sortBy) params.set(SEARCH_PARAMS.SORT_BY, sortBy)
+  if (sortOrder) params.set(SEARCH_PARAMS.SORT_ORDER, sortOrder)
+  if (selectedTag) params.set(SEARCH_PARAMS.TAG, selectedTag)
 
   navigate(`?${params.toString()}`)
 }
@@ -33,11 +34,11 @@ export const convertSearchParamsToString = ({
   selectedTag,
 }: SearchParams) => {
   const params = new URLSearchParams()
-  if (skip) params.set("skip", skip.toString())
-  if (limit) params.set("limit", limit.toString())
-  if (q) params.set("search", q)
-  if (sortBy) params.set("sortBy", sortBy)
-  if (sortOrder) params.set("sortOrder", sortOrder)
+  if (skip) params.set(SEARCH_PARAMS.SKIP, skip.toString())
+  if (limit) params.set(SEARCH_PARAMS.LIMIT, limit.toString())
+  if (q) params.set(SEARCH_PARAMS.SEARCH, q)
+  if (sortBy) params.set(SEARCH_PARAMS.SORT_BY, sortBy)
+  if (sortOrder) params.set(SEARCH_PARAMS.SORT_ORDER, sortOrder)
 
   // 조건부 URL 생성
   const hasTag = selectedTag && selectedTag !== "all"

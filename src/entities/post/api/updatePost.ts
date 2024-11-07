@@ -6,5 +6,10 @@ export const updatePostApi = async (
   selectedPost: Partial<Post>,
 ): Promise<Post> => {
   const { id } = selectedPost
-  return await fetchPost(`/${id}`, { method: "PUT", body: selectedPost })
+  const { ok, data, error } = await fetchPost(`/${id}`, {
+    method: "PUT",
+    body: selectedPost,
+  })
+  if (!ok) throw new Error(error ? error : "Failed to updatePost")
+  return data
 }

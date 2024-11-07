@@ -1,8 +1,8 @@
-import { createPostDialogAtom } from "@features/dialog/model/atom"
+import { PrimitiveAtom } from "jotai"
 import { useAtom } from "jotai"
 
-export const useCreatePostDialog = () => {
-  const [opened, setDialogs] = useAtom(createPostDialogAtom)
+export const useDialog = (dialogAtom: PrimitiveAtom<boolean>) => {
+  const [opened, setDialogs] = useAtom(dialogAtom)
 
   const openDialog = () => setDialogs(true)
 

@@ -1,10 +1,12 @@
-import { User } from "@entities/user/types"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { fetchJson } from "@shared/utils/fetchJson"
 
-export const fetchUserApi = async (id: number): Promise<User> => {
-  try {
-    const response = await fetch(`/api/users/${id}`)
-    return (await response.json()) as User
-  } catch (e) {
-    throw new Error("Failed to fetch user data: " + e)
-  }
+export const fetchUserApi = async (
+  url: string,
+  requestInit?: Omit<RequestInit, "body"> & { body?: any },
+) => {
+  const { ok, data, error } = await fetchJson(`/api/users/${url}`, {
+    ...requestInit,
+  })
+  return { ok, data, error }
 }

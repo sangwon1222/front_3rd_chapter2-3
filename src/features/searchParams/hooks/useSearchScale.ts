@@ -14,8 +14,11 @@ export const useSearchScale = () => {
 
   // URL 파라미터에 따라 searchParams 초기화
   useEffect(() => {
-    const skip = parseInt(getSearchParamsToURL("skip"))
-    const limit = parseInt(getSearchParamsToURL("limit"))
+    const urlSkip = getSearchParamsToURL("skip")
+    const urlLimit = getSearchParamsToURL("limit")
+    const skip = urlSkip ? parseInt(urlSkip) : 0
+    const limit = urlLimit ? parseInt(urlLimit) : 0
+
     setSearchScale({ skip, limit })
     updateURL(navigate, searchScale)
   }, [])

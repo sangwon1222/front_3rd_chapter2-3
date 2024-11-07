@@ -1,10 +1,8 @@
 import { User } from "@entities/user/types"
+import { fetchJson } from "@shared/utils/fetchJson"
 
 export const fetchUserListApi = async (): Promise<User[]> => {
-  try {
-    const response = await fetch("/api/users?limit=0")
-    return (await response.json()).users as User[]
-  } catch (e) {
-    throw new Error("Failed to fetch user list data: " + e)
-  }
+  const { ok, data, error } = await fetchJson("/api/users?limit=0", {})
+  if (!ok) throw new Error(error ? error : "Failed to fetch user list data: ")
+  return data.users
 }

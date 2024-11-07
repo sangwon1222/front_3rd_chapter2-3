@@ -5,5 +5,8 @@ export const fetchComment = async (
   url: string,
   requestInit?: Omit<RequestInit, "body"> & { body?: any },
 ) => {
-  return await fetchJson(`/api/comments${url}`, { ...requestInit })
+  const { ok, data, error } = await fetchJson(`/api/comments${url}`, {
+    ...requestInit,
+  })
+  return { ok, data, error }
 }

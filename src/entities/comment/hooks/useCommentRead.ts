@@ -12,8 +12,8 @@ export const useCommentRead = (postId: number) => {
     staleTime: 0,
   })
 
-  if (isCommentLoading)
+  if (isCommentLoading) {
     return { data: null, comments: null, isCommentLoading: true, error }
-
+  }
   return { data, comments: data.comments, isCommentLoading: false, error: null }
 }

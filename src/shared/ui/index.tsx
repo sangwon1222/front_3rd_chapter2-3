@@ -3,7 +3,7 @@ import { forwardRef } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.ComponentProps<"input"> {
   className?: string
   type?: string
 }
@@ -12,7 +12,7 @@ interface DefaultProps extends React.HTMLAttributes<HTMLElement> {
   className?: string
 }
 
-interface TextareaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps extends React.ComponentProps<"textarea"> {
   className?: string
   rows?: number
   placeholder?: string

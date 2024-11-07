@@ -1,14 +1,14 @@
-import { useUserDetailDialog } from "@features/dialog/hooks/useUserDetailDialog"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@shared/ui"
 import { selectedUserAtom } from "@entities/user/model/atom"
 import { useAtomValue } from "jotai"
 
-export const UserDetail: React.FC = () => {
+export const UserDetail: React.FC<{ closeDialog: () => void }> = ({
+  closeDialog,
+}) => {
   const selectedUser = useAtomValue(selectedUserAtom)
-  const { opened, closeDialog } = useUserDetailDialog()
 
   return (
-    <Dialog open={opened} onOpenChange={closeDialog}>
+    <Dialog open={true} onOpenChange={closeDialog}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>사용자 정보</DialogTitle>

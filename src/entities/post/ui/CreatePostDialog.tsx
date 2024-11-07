@@ -12,26 +12,26 @@ import {
   Dialog,
   Input,
 } from "@shared/ui"
-import { useCreatePostDialog } from "@features/dialog/hooks/useCreatePostDialog"
 
-type PropsType = { userId: number }
+type PropsType = { userId: number; closeDialog: () => void }
 
-export const CreatePostDialog: React.FC<PropsType> = ({ userId }) => {
+export const CreatePostDialog: React.FC<PropsType> = ({
+  userId,
+  closeDialog,
+}) => {
   const { createPost } = usePostCreate()
-  const { opened, closeDialog } = useCreatePostDialog()
-  const { postForm, updatePostForm, resetPostForm } = usePostForm(opened, {
+  const { postForm, updatePostForm } = usePostForm({
     ...DEFAULT_POST_FORM,
     userId,
   })
 
   const submitNewPostForm = useCallback(() => {
     createPost({ ...(postForm as PostForm) })
-    resetPostForm()
     closeDialog()
   }, [postForm])
 
   return (
-    <Dialog open={opened} onOpenChange={() => closeDialog()}>
+    <Dialog open={true} onOpenChange={() => closeDialog()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>새 게시물 추가</DialogTitle>

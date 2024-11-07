@@ -1,8 +1,7 @@
-import { DefaultProps } from "@shared/types"
 import { Search } from "lucide-react"
 import { Input } from ".."
 
-interface PropsType extends DefaultProps {
+interface PropsType {
   placeholder?: string
   initialValue?: string
   onChange: (v: string) => void

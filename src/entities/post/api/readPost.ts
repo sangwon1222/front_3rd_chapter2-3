@@ -7,5 +7,7 @@ export const readPostApi = async (
   params: SearchParams,
 ): Promise<PostQueryResult> => {
   const queryString = convertSearchParamsToString({ ...params })
-  return await fetchPost(`${queryString}`)
+  const { ok, data, error } = await fetchPost(`${queryString}`)
+  if (!ok) throw new Error(error ? error : "Failed to readPost")
+  return data
 }

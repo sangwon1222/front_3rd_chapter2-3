@@ -5,5 +5,8 @@ export const fetchPost = async (
   url: string,
   requestInit?: Omit<RequestInit, "body"> & { body?: any },
 ) => {
-  return await fetchJson(`/api/posts${url}`, { ...requestInit })
+  const { ok, data, error } = await fetchJson(`/api/posts${url}`, {
+    ...requestInit,
+  })
+  return { ok, data, error }
 }

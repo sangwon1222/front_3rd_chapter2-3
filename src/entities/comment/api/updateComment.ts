@@ -2,16 +2,20 @@ import { fetchComment } from "@entities/comment/api/fetchComment"
 import { Comment } from "@entities/comment/types"
 
 export const updateCommentApi = async (comment: Comment) => {
-  return await fetchComment(`/${comment.id}`, {
+  const { ok, data, error } = await fetchComment(`/${comment.id}`, {
     method: "PUT",
-    body: JSON.stringify({ body: comment.body, likes: comment.likes }),
+    body: { body: comment.body, likes: comment.likes },
   })
+  if (!ok) throw new Error(error ? error : "Failed to updateComment")
+  return data
 }
 
 export const likeCommentApi = async (comment: Comment) => {
   const { id, likes } = comment
-  return await fetchComment(`/${id}`, {
+  const { ok, data, error } = await fetchComment(`/${id}`, {
     method: "PATCH",
-    body: JSON.stringify({ likes }),
+    body: { likes },
   })
+  if (!ok) throw new Error(error ? error : "Failed to likeComment")
+  return data
 }

@@ -1,4 +1,3 @@
-import { useCreateCommentDialog } from "@features/dialog/hooks/useCreateCommentDialog"
 import { useCommentCreate } from "@entities/comment/hooks/useCommentCreate"
 import { useCommentForm } from "@entities/comment/hooks/useCommentForm"
 import { useSelectedPost } from "@entities/post/hooks/useSelectedPost"
@@ -13,11 +12,12 @@ import {
   Dialog,
 } from "@shared/ui"
 
-export const CreateComment: React.FC = () => {
+export const CreateComment: React.FC<{ closeDialog: () => void }> = ({
+  closeDialog,
+}) => {
   const { createComment } = useCommentCreate()
   const { selectedPost } = useSelectedPost()
-  const { opened, closeDialog } = useCreateCommentDialog()
-  const { commentForm, updateCommentForm, resetCommentForm } = useCommentForm({
+  const { commentForm, updateCommentForm } = useCommentForm({
     ...DEFAULT_COMMENT_FORM,
   })
 
@@ -28,11 +28,10 @@ export const CreateComment: React.FC = () => {
   const submitComment = useCallback(() => {
     createComment(commentForm)
     closeDialog()
-    resetCommentForm()
   }, [commentForm])
 
   return (
-    <Dialog open={opened} onOpenChange={() => closeDialog()}>
+    <Dialog open={true} onOpenChange={() => closeDialog()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>새 댓글 추가</DialogTitle>

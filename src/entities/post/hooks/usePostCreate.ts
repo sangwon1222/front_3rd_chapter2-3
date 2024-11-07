@@ -15,23 +15,25 @@ export const usePostCreate = () => {
       const { title, userId, body } = data
       queryClient.setQueryData(
         ["posts", searchParams],
-        (oldData: PostQueryResult) => ({
-          limit: oldData.limit,
-          skip: oldData.skip,
-          posts: [
-            {
-              id: (oldData?.total || 0) + 1,
-              title,
-              userId,
-              body,
-              reactions: { likes: 0, dislikes: 0 },
-              tags: [],
-              views: 0,
-            },
-            ...(oldData?.posts || []),
-          ],
-          total: (oldData?.total || 0) + 1,
-        }),
+        (oldData: PostQueryResult) => {
+          return {
+            limit: oldData.limit,
+            skip: oldData.skip,
+            posts: [
+              {
+                id: (oldData?.total || 0) + 1,
+                title,
+                userId,
+                body,
+                reactions: { likes: 0, dislikes: 0 },
+                tags: [],
+                views: 0,
+              },
+              ...(oldData?.posts || []),
+            ],
+            total: (oldData?.total || 0) + 1,
+          }
+        },
       )
     },
   })

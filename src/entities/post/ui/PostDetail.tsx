@@ -1,18 +1,23 @@
-import { usePostDetailDialog } from "@features/dialog/hooks/usePostDetailDialog"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@shared/ui"
 import { searchTextAtom } from "@features/searchParams/model/atom"
 import { selectedPostsAtom } from "@entities/post/model/atom"
 import { highlightText } from "@shared/utils/highlightText"
-import { CommentBox } from "@entities/comment/ui/CommentBox"
 import { useAtomValue } from "jotai"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@shared/ui"
+import { lazy, Suspense } from "react"
 
-export const PostDetail: React.FC = () => {
-  const { opened, closeDialog } = usePostDetailDialog()
+const CommentBox = lazy(() => import("@entities/comment/ui/CommentBox"))
+
+export const PostDetail: React.FC<{
+  opened: boolean
+  closeDialog: () => void
+}> = ({ opened, closeDialog }) => {
   const searchText = useAtomValue(searchTextAtom)
   const selectedPost = useAtomValue(selectedPostsAtom)
 
+  if (!opened) return null
+  if (!selectedPost) return <div>loading</div>
   return (
-    <Dialog open={opened} onOpenChange={() => closeDialog()}>
+    <Dialog open={opened} onOpenChange={closeDialog}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
@@ -23,7 +28,9 @@ export const PostDetail: React.FC = () => {
           <p>{highlightText(selectedPost?.body, searchText)}</p>
 
           {/* 댓글 컴포넌트 */}
-          <CommentBox postId={selectedPost?.id} searchText={searchText} />
+          <Suspense fallback={<div>loading</div>}>
+            <CommentBox postId={selectedPost?.id} searchText={searchText} />
+          </Suspense>
         </div>
       </DialogContent>
     </Dialog>

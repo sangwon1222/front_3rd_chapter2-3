@@ -13,7 +13,7 @@ export const useSearchSortOrder = () => {
 
   // URL 파라미터에 따라 searchParams 초기화
   useEffect(() => {
-    const newSortOrder = getSearchParamsToURL("sortOder")
+    const newSortOrder = getSearchParamsToURL("order")
     setSearchSortOrder(newSortOrder)
     updateURL(navigate, { sortOrder: newSortOrder })
   }, [])

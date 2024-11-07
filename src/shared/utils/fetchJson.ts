@@ -11,8 +11,13 @@ export const fetchJson = async (
       ...{ body: JSON.stringify(requestInit?.body) },
       method: requestInit?.method,
     })
-    return await response.json()
+
+    if (!response.ok) {
+      return { ok: false, data: null, error: `Failed to ${url}` }
+    }
+
+    return { ok: true, data: await response.json(), error: null }
   } catch (error) {
-    throw new Error(`Failed to ${url}: ${error}`)
+    return { ok: false, data: null, error: `Failed to ${url}: ${error}` }
   }
 }

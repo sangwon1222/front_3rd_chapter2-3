@@ -13,14 +13,16 @@ export const usePostUpdate = () => {
     onSuccess: (data: Post) => {
       queryClient.setQueryData(
         ["posts", searchParams],
-        (oldData: PostQueryResult) => ({
-          limit: oldData.limit,
-          skip: oldData.skip,
-          posts: (oldData?.posts || []).map((post) =>
-            post.id === data.id ? data : post,
-          ),
-          total: (oldData?.total || 0) + 1,
-        }),
+        (oldData: PostQueryResult) => {
+          return {
+            limit: oldData.limit,
+            skip: oldData.skip,
+            posts: (oldData?.posts || []).map((post) =>
+              post.id === data.id ? data : post,
+            ),
+            total: (oldData?.total || 0) + 1,
+          }
+        },
       )
     },
   })

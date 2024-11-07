@@ -1,10 +1,12 @@
-export const fetchTag = async () => {
-  try {
-    const response = await fetch("/api/posts/tags")
-    const data = await response.json()
-    return data
-  } catch (e) {
-    console.error("태그 가져오기 오류" + e)
-    return []
-  }
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { fetchJson } from "@shared/utils/fetchJson"
+
+export const fetchTag = async (
+  url: string,
+  requestInit?: Omit<RequestInit, "body"> & { body?: any },
+) => {
+  const { ok, data, error } = await fetchJson(`/api/posts/tags${url}`, {
+    ...requestInit,
+  })
+  return { ok, data, error }
 }

@@ -1,9 +1,10 @@
-import { useCreatePostDialog } from "@features/dialog/hooks/useCreatePostDialog"
+import { useDialog } from "@features/dialog/hooks/useDialog"
+import { createPostDialogAtom } from "@features/dialog/model/atom"
 import { Button } from "@shared/ui/button"
 import { Plus } from "lucide-react"
 
 export const PostsHeader: React.FC = () => {
-  const { openDialog } = useCreatePostDialog()
+  const { openDialog } = useDialog(createPostDialogAtom)
   return (
     <div className="flex flex-col space-y-1.5 p-6">
       <div className="flex items-center justify-between text-2xl font-semibold leading-none tracking-tight">

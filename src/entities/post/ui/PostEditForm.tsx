@@ -14,14 +14,14 @@ import {
   Dialog,
   Input,
 } from "@shared/ui"
-import { useEditPostDialog } from "@features/dialog/hooks/useEditPostDialog"
 
-export const PostEditForm: React.FC = () => {
+export const PostEditForm: React.FC<{
+  closeDialog: () => void
+}> = ({ closeDialog }) => {
   const selectedPost = useAtomValue(selectedPostsAtom)
-  const { opened, closeDialog } = useEditPostDialog()
   const { updatePost } = usePostUpdate()
 
-  const { postForm, updatePostForm, resetPostForm } = usePostForm(opened, {
+  const { postForm, updatePostForm } = usePostForm({
     ...selectedPost,
   })
 
@@ -29,12 +29,11 @@ export const PostEditForm: React.FC = () => {
     const updated = !deepEqual(postForm, selectedPost)
     if (updated) updatePost({ ...(postForm as Post) })
 
-    resetPostForm()
     closeDialog()
   }, [postForm])
 
   return (
-    <Dialog open={opened} onOpenChange={() => closeDialog()}>
+    <Dialog open={true} onOpenChange={() => closeDialog()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>게시물 수정</DialogTitle>

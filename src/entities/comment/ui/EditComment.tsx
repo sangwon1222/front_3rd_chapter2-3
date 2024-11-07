@@ -1,4 +1,3 @@
-import { useEditCommentDialog } from "@features/dialog/hooks/useEditCommentDialog"
 import { useCommentUpdate } from "@entities/comment/hooks/useCommentUpdate"
 import { useCommentForm } from "@entities/comment/hooks/useCommentForm"
 import { DEFAULT_COMMENT_FORM } from "@entities/comment/constants"
@@ -15,17 +14,19 @@ import {
   Dialog,
 } from "@shared/ui"
 
-export const EditComment: React.FC = () => {
+export const EditComment: React.FC<{ closeDialog: () => void }> = ({
+  closeDialog,
+}) => {
   const { updateComment } = useCommentUpdate()
   const selectedComment = useAtomValue(selectedCommentAtom)
-  const { opened, closeDialog } = useEditCommentDialog()
 
-  const { commentForm, updateCommentForm, resetCommentForm } = useCommentForm({
+  const { commentForm, updateCommentForm } = useCommentForm({
     ...DEFAULT_COMMENT_FORM,
   })
 
   /** 기존 댓글 textarea 세팅 */
   useEffect(() => {
+    console.log(selectedComment, commentForm)
     updateCommentForm({
       postId: selectedComment.id,
       body: selectedComment.body,
@@ -37,11 +38,10 @@ export const EditComment: React.FC = () => {
     updateComment({ ...selectedComment, ...commentForm } as Comment)
 
     closeDialog()
-    resetCommentForm()
   }, [commentForm])
 
   return (
-    <Dialog open={opened} onOpenChange={() => closeDialog()}>
+    <Dialog open={true} onOpenChange={() => closeDialog()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>댓글 수정</DialogTitle>

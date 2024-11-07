@@ -26,13 +26,13 @@ export const PostSearch: React.FC = () => {
         onValueChange={updateSearchTag}
       />
       <SelectRoot
-        items={SORT_BY_LIST}
+        items={[...SORT_BY_LIST]}
         placeholder="정렬 기준"
         value={sortBy}
         onValueChange={updateSearchSortBy}
       />
       <SelectRoot
-        items={SORT_ORDER_LIST}
+        items={[...SORT_ORDER_LIST]}
         placeholder="정렬 순서"
         value={sortOrder}
         onValueChange={updateSearchSortOrder}

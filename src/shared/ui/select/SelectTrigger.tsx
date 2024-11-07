@@ -1,8 +1,15 @@
 import { Trigger, SelectValue } from "@radix-ui/react-select"
-import { SelectProps } from "@shared/types"
 import { ChevronDown } from "lucide-react"
 
-export const SelectTrigger: React.FC<SelectProps> = ({ placeholder, className }) => {
+export interface SelectProps {
+  placeholder: string
+  className?: string
+}
+
+export const SelectTrigger: React.FC<SelectProps> = ({
+  placeholder,
+  className = "",
+}) => {
   return (
     <Trigger
       className={`

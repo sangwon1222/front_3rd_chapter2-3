@@ -1,6 +1,3 @@
-import { useUserDetailDialog } from "@features/dialog/hooks/useUserDetailDialog"
-import { usePostDetailDialog } from "@features/dialog/hooks/usePostDetailDialog"
-import { useEditPostDialog } from "@features/dialog/hooks/useEditPostDialog"
 import { useSelectedPost } from "@entities/post/hooks/useSelectedPost"
 import { PostActionCell } from "@entities/post/ui/PostActionCell"
 import { PostTitleCell } from "@entities/post/ui/PostTitleCell"
@@ -12,14 +9,20 @@ import { TableCell } from "@shared/ui"
 import { Post } from "../types"
 import { useAtom } from "jotai"
 import { selectedUserAtom } from "@entities/user/model/atom"
+import {
+  editPostDialogAtom,
+  postDetailDialogAtom,
+  userDetailDialogAtom,
+} from "@features/dialog/model/atom"
+import { useDialog } from "@features/dialog/hooks/useDialog"
 
 export const PostsGridBody: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const { updateSelectedPost } = useSelectedPost()
   const [selectedUser, setSelectedUser] = useAtom(selectedUserAtom)
 
-  const { openDialog: openUserDetail } = useUserDetailDialog()
-  const { openDialog: openEditPost } = useEditPostDialog()
-  const { openDialog: openPostDetail } = usePostDetailDialog()
+  const { openDialog: openUserDetail } = useDialog(userDetailDialogAtom)
+  const { openDialog: openEditPost } = useDialog(editPostDialogAtom)
+  const { openDialog: openPostDetail } = useDialog(postDetailDialogAtom)
 
   // 유저 모달 열기
   const openUserModal = useCallback(

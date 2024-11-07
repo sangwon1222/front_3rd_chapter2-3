@@ -22,7 +22,7 @@ export const PostPagination: React.FC<PropsType> = ({ total }) => {
           <span>표시</span>
 
           <SelectRoot
-            items={LIMIT_LIST}
+            items={[...LIMIT_LIST]}
             value={limit.toString()}
             onValueChange={(v) => updateSearchScale({ limit: Number(v) })}
             placeholder={LIMIT_DEFAULT}

@@ -12,18 +12,20 @@ export const useCommentCreate = () => {
   const createCommentMutation = useMutation({
     mutationFn: createCommentApi,
     onSuccess: (data: Comment) => {
-      queryClient.setQueryData(["comment"], (oldData: CommentsFetchResult) => ({
-        limit: oldData.limit,
-        skip: oldData.skip,
-        comments: [
-          {
-            ...data,
-            id: oldData?.comments?.length || 0,
-          },
-          ...(oldData?.comments || []),
-        ],
-        total: (oldData?.total || 0) + 1,
-      }))
+      queryClient.setQueryData(["comment"], (oldData: CommentsFetchResult) => {
+        return {
+          limit: oldData.limit,
+          skip: oldData.skip,
+          comments: [
+            {
+              ...data,
+              id: oldData?.comments?.length || 0,
+            },
+            ...(oldData?.comments || []),
+          ],
+          total: (oldData?.total || 0) + 1,
+        }
+      })
     },
   })
 

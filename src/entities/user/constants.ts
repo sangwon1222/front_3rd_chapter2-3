@@ -9,4 +9,4 @@ export const DEFAULT_USER_DATA = {
   company: { name: "", title: "" },
   email: "",
   image: "",
-}
+} as const

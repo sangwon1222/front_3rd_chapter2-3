@@ -1,8 +1,17 @@
 import { ItemText, ItemIndicator, Item } from "@radix-ui/react-select"
-import { DefaultProps, SelectItemProps } from "@shared/types"
 import { Check } from "lucide-react"
 
-export const SelectItem: React.FC<SelectItemProps & DefaultProps> = ({ className = "", value, label }) => {
+export interface SelectItemProps {
+  label: string
+  value: string
+  className?: string
+}
+
+export const SelectItem: React.FC<SelectItemProps> = ({
+  className = "",
+  value,
+  label,
+}) => {
   return (
     <Item
       className={`

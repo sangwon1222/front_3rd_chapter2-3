@@ -1,4 +1,3 @@
-import { useCreateCommentDialog } from "@features/dialog/hooks/useCreateCommentDialog"
 import { DeleteCommentBtn } from "@entities/comment/ui/DeleteCommentBtn"
 import { useCommentRead } from "@entities/comment/hooks/useCommentRead"
 import { LikeCommentBtn } from "@entities/comment/ui/LikeCommentBtn"
@@ -7,15 +6,18 @@ import { highlightText } from "@shared/utils/highlightText"
 import { Comment } from "@entities/comment/types"
 import { Button } from "@shared/ui/button"
 import { Plus } from "lucide-react"
+import { createCommentDialogAtom } from "@features/dialog/model/atom"
+import { useDialog } from "@features/dialog/hooks/useDialog"
 
 type PropsType = {
   postId: number
   searchText: string
 }
-export const CommentBox: React.FC<PropsType> = ({ postId, searchText }) => {
-  const { openDialog } = useCreateCommentDialog()
-  const { comments } = useCommentRead(postId)
+const CommentBox: React.FC<PropsType> = ({ postId, searchText }) => {
+  const { openDialog } = useDialog(createCommentDialogAtom)
+  const { comments, isCommentLoading } = useCommentRead(postId)
 
+  if (isCommentLoading) return <div>loading</div>
   return (
     <div className="mt-2">
       <div className="flex items-center justify-between mb-2">
@@ -50,3 +52,5 @@ export const CommentBox: React.FC<PropsType> = ({ postId, searchText }) => {
     </div>
   )
 }
+
+export default CommentBox

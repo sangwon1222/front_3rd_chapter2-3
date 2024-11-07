@@ -1,7 +1,7 @@
 import { convertToTagOptions } from "@entities/tag/services"
 import { useQuery } from "@tanstack/react-query"
 import { useLocation } from "react-router-dom"
-import { fetchTag } from "@entities/tag/api"
+import { readTag } from "@entities/tag/api"
 import { useEffect, useState } from "react"
 import { Tag } from "@entities/tag/types"
 
@@ -12,7 +12,7 @@ export const useTags = () => {
 
   const { data } = useQuery<Tag[]>({
     queryKey: ["tags"],
-    queryFn: fetchTag,
+    queryFn: readTag,
     enabled: tags === null,
   })
 
