@@ -8,5 +8,6 @@ export const fetchUserApi = async (
   const { ok, data, error } = await fetchJson(`/api/users/${url}`, {
     ...requestInit,
   })
-  return { ok, data, error }
+  if (!ok) throw new Error(error ? error : "Failed to fetch user")
+  return data
 }

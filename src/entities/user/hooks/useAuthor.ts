@@ -11,7 +11,7 @@ export const useAuthor = (userId: number) => {
       if (userCache.hasUser(userId)) {
         return userCache.getUser(userId) as User
       } else {
-        const userData = await fetchUserApi(userId)
+        const userData = await fetchUserApi(String(userId))
         userCache.updateUser(userData)
         return userData
       }

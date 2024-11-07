@@ -4,7 +4,9 @@ import { Post } from "@entities/post/types"
 import { useAtom } from "jotai"
 
 export const useSelectedPost = () => {
-  const [selectedPost, setSelectedPost] = useAtom<Post>(selectedPostsAtom)
+  const [selectedPost, setSelectedPost] = useAtom<Post | null>(
+    selectedPostsAtom,
+  )
 
   // 포스트 선택
   const updateSelectedPost = useCallback(
