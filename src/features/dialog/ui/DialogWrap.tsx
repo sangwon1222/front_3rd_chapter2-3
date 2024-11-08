@@ -1,10 +1,8 @@
-import { CreatePostDialog } from "@entities/post/ui/CreatePostDialog"
-import { PostEditForm } from "@entities/post/ui/PostEditForm"
-import { PostDetail } from "@entities/post/ui/PostDetail"
-import { UserDetail } from "@entities/user/ui/UserDetail"
-import { CreateComment } from "@entities/comment/ui/CreateComment"
-import { EditComment } from "@entities/comment/ui/EditComment"
-import { useDialog } from "../hooks/useDialog"
+import { CreatePostDialog } from "@widgets/ui/dialog/CreatePostDialog"
+import { UserDetail } from "@widgets/ui/user/UserDetail"
+import { CreateComment } from "@widgets/ui/comment/CreateComment"
+import { EditComment } from "@widgets/ui/comment/EditComment"
+import { useDialog } from "@features/dialog/hooks/useDialog"
 import {
   createCommentDialogAtom,
   createPostDialogAtom,
@@ -13,8 +11,10 @@ import {
   postDetailDialogAtom,
   userDetailDialogAtom,
 } from "../model/atom"
-import { selectedPostsAtom } from "@entities/post/model/atom"
 import { useAtom } from "jotai"
+import { PostEditForm } from "@widgets/ui/post/PostEditForm"
+import { PostDetail } from "@widgets/ui/post/PostDetail"
+import { selectedPostsAtom } from "@features/post/model/atom"
 
 export const DialogWrap = () => {
   const [, setSelectedPost] = useAtom(selectedPostsAtom)

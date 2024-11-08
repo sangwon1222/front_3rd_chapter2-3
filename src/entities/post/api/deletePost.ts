@@ -1,4 +1,4 @@
-import { fetchPost } from "./fetchPost"
+import { fetchPost } from "@entities/post/api/fetchPost"
 
 /** 게시물 삭제 */
 export const deletePostApi = async (id: number): Promise<number> => {

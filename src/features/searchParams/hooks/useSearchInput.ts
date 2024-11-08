@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { searchTextAtom } from "@features/searchParams/model/atom"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import {
   getSearchParamsToURL,
   updateURL,
-} from "@entities/post/services/URLServices"
+} from "@features/post/services/URLServices"
 import { useAtom } from "jotai"
 
 export const useSearchInput = () => {

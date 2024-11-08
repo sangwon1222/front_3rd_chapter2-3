@@ -1,4 +1,4 @@
-import { convertSearchParamsToString } from "@entities/post/services/URLServices"
+import { convertSearchParamsToString } from "@features/post/services/URLServices"
 import { SearchParams } from "@features/searchParams/types"
 import { PostQueryResult } from "@entities/post/types"
 import { fetchPost } from "./fetchPost"

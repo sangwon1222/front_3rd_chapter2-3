@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { searchScaleAtom } from "@features/searchParams/model/atom"
 import { SearchParams, SearchParamScale } from "@features/searchParams/types"
 import { useNavigate } from "react-router-dom"
@@ -5,7 +6,7 @@ import { useCallback, useEffect } from "react"
 import {
   getSearchParamsToURL,
   updateURL,
-} from "@entities/post/services/URLServices"
+} from "@features/post/services/URLServices"
 import { useAtom } from "jotai"
 
 export const useSearchScale = () => {

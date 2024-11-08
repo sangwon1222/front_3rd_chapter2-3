@@ -1,7 +1,7 @@
-import { PostsGridWrap } from "@entities/post/ui/PostsGridWrap"
-import { useUserCache } from "@entities/user/hooks/useUserCache"
+import { PostsGridWrap } from "@widgets/ui/post/PostsGridWrap"
+import { useUserCache } from "@features/user/api/useUserCache"
 import { DialogWrap } from "@features/dialog/ui/DialogWrap"
-import { PostsHeader } from "@entities/post/ui/PostsHeader"
+import { PostsHeader } from "@features/post/ui/PostsHeader"
 import { PostsWrap } from "@shared/ui"
 
 const PostsManager = () => {

@@ -1,5 +1,5 @@
+import { fetchComment } from "@entities/comment/api/fetchComment"
 import { CommentForm } from "@entities/comment/types"
-import { fetchComment } from "./fetchComment"
 
 export const createCommentApi = async (comment: CommentForm) => {
   const { ok, data, error } = await fetchComment("/add", {

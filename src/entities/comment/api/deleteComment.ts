@@ -1,4 +1,4 @@
-import { fetchComment } from "./fetchComment"
+import { fetchComment } from "@entities/comment/api/fetchComment"
 
 export const deleteCommentApi = async (id: number) => {
   const { ok, error } = await fetchComment(`/${id}`, {
